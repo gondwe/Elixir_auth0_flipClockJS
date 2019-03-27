@@ -1,0 +1,24 @@
+
+<%= for ev <- @events do %>
+<div class="jumbotron">
+  <span class="h1">Days Until <%= ev.title %></span>
+    <p class="text-center"><span class="countdownClock" data-due="<%= ev.due %>"></span></p>
+  </div>
+<% end %>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+
+<script>
+$(document).ready(function() {
+    $('.countdownClock').each(function(i, el) {
+      var today = new Date();
+      var due = new Date($(el).data('due'));
+
+      $(el).FlipClock((due/1000) - (today/1000), {
+          clockFace: 'DailyCounter',
+            countdown: true,
+            showSeconds: true
+      });
+    });
+});
+</script>
